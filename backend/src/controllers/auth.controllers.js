@@ -3,6 +3,7 @@ import User from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
 import {sendWelcomeEmail} from '../nodemailer/email.js';
 import { ENV } from '../lib/env.js';
+import cloudinary from '../lib/cloudinary.js';
 
 
 export const userSignup = async(req, res)=>{
@@ -93,3 +94,29 @@ export const userLogout = (_, res)=>{
     })
 };
 
+export  const updateProfile = async (req, res) =>{
+    try{
+        const {profilePic} = req.body;
+        if(!profilePic){
+            return res.status(400).json({success: false, message: "Profile pic is required"});
+        }
+        
+        const userId = req.user_id;
+        const uploadResource = await cloudinary.uploader.upload(profilePic);
+
+        const updatedUser = User.findByIdAndUpdate(
+            userId,
+            {profilePic: uploadResource.secure_url},
+            {new: true}
+        )
+
+        res.status(200).json({success: true, data: updatedUser});
+    }catch(error){
+        console.log("Error in update Profile controller :", error);
+        res.status(500).json({success: false, message: "Internal server error"});
+    };
+};
+
+export const  checkAuth = (req, res) =>{
+    res.status(200).json({success: true, data: req.user})
+};
