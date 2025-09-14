@@ -54,10 +54,42 @@ export const userSignup = async(req, res)=>{
     }
 };
 
-export const userLogin = ()=>{
+export const userLogin = async (req, res)=>{
+    const {email, password} = req.body;
 
+    try {   
+        if(!email || !password){
+            return res.status(400).json({success: false, message: "all fields are required"});
+        };
+
+        const user = await User.findOne({email});
+        if(!user){
+            res.status(400).json({success: false, message: "Invalid credentials"});
+        }
+
+        const isPassCorrect = await bcrypt.compare(password, user.password);
+        if(!isPassCorrect){
+            res.status(400).json({success: false, message: "Invalid credentials"});
+        }
+
+        generateToken(user._id, res);
+
+        res.status(200).json({
+            success: true,
+            message: "Login successful"
+        });
+
+    } catch (error) {
+        console.log("Error in login route :", error);
+        res.status(500).json({success: false,  message: "internal server error"});
+    };
 };
 
-export const userLogout = ()=>{
-
+export const userLogout = (_, res)=>{
+    res.cookie("jwt", " ", {maxAge: 0});
+    res.status(200).json({
+        success: true,
+        message: "Successfully logged out"
+    })
 };
+
