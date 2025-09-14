@@ -1,6 +1,9 @@
 import { generateToken } from '../lib/utils.js';
 import User from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
+import {sendWelcomeEmail} from '../nodemailer/email.js';
+import { ENV } from '../lib/env.js';
+
 
 export const userSignup = async(req, res)=>{
      const {fullName, email, password} = req.body;
@@ -36,12 +39,14 @@ export const userSignup = async(req, res)=>{
         });
 
         await newUser.save();
-        const token = generateToken(newUser._id, res);
+        generateToken(newUser._id, res);
      
         res.status(201).json({
             success: true,
             message: "user signup successful",
             data: {...newUser._doc, password: "undefined"}});
+        
+        sendWelcomeEmail(newUser.email, newUser.fullName , ENV.CLIENT_URL);
         
     } catch (error) {
         console.log("Error in signup route", error);
