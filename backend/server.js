@@ -4,12 +4,17 @@ import messageRoutes from "./src/routes/message.route.js";
 import { connectDb } from "./src/lib/database.js";
 import { ENV } from "./src/lib/env.js";
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 const app = express();
 const PORT = ENV.PORT || 3500;
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+    origin: ENV.CLIENT_URL,
+    credentials: true
+}))
 app.use("/api/auth" , authRoutes);
 app.use("/api/messages" , messageRoutes);
 
