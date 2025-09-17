@@ -16,7 +16,7 @@ function SignUpPage() {
 
   return (
     <div className="w-full flex items-center justify-center p-4 bg-slate-900">
-      <div className="relative w-full max-w-4xl md:h-[550px] h-[550px]">
+      <div className="relative w-full max-w-4xl md:h-[550px]">
       <AnimatedBorderContainer>
         <div className="w-full flex flex-col md:flex-row ">
           {/* form column- left side */}
@@ -80,12 +80,16 @@ function SignUpPage() {
                   </div>
                 </div>
 
-                {/* Submit button */}
-                <button className="auth-btn" type="submit" disabled={isSigningUp}>
-                  {isSigningUp ? <LoaderIcon className="w-5 h-5 animate-spin mx-auto"/> : "Sign Up"}
-      
-                </button>
+                {/* SUBMIT BUTTON */}
+                  <button className="auth-btn" type="submit" disabled={isSigningUp}>
+                    {isSigningUp ? (
+                      <LoaderIcon className="w-full h-5 animate-spin text-center" />
+                    ) : (
+                      "Create Account"
+                    )}
+                  </button>
               </form>
+              
               <div className="mt-4 text-center">
                 <Link to="/login" className="auth-link">
                 Already have an account? Login
