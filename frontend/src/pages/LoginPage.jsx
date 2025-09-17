@@ -8,7 +8,7 @@ import { MessageCircleIcon, LockIcon, MailIcon, LoaderIcon } from "lucide-react"
 const LoginPage = () => {
    const [formData, setFormData] = useState({
       email: "", 
-      password: ""
+      password: "" 
     });
 
     const {login, isLoggingIn} = useAuthStore();
