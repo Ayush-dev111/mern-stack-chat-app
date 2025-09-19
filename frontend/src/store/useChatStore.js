@@ -18,9 +18,7 @@ export const useChatStore = create((set,get)=>({
 
   },
 
-  setActiveTab: (tab)=> {
-        set({ActiveTab: tab});
-  },
+  setActiveTab: (tab)=> set({activeTab: tab}),
 
   setSelectedUser: (selectedUser) => set({selectedUser}),
 
