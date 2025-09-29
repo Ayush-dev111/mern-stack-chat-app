@@ -3,9 +3,13 @@ import { useChatStore } from "../store/useChatStore";
 import UsersLoadingSkeleton from "./UsersLoadingSkeleton";
 import NoChatsFound from "./NoChatsFound";
 import avatarImage from "../assets/avatar.png"
+import { useAuthStore } from "../store/useAuthStore";
 
 function ChatsList() {
   const { getChatPartners, chats, isUsersLoading, setSelectedUser } = useChatStore();
+  const { onlineUsers } = useAuthStore();
+
+
   useEffect(() => {
      getChatPartners();
   }, [ getChatPartners]);
@@ -23,7 +27,7 @@ function ChatsList() {
         >
           <div className="flex items-center gap-3">
             {/* online offline status */}
-              <div className = {`avatar avatar-online`}>
+              <div className = {`avatar ${onlineUsers.includes(chat._id) ? 'avatar-online' : 'avatar-offline'}`}>
               <div className="size-12 rounded-full overflow-hidden">
                 <img className="size-full object-cover" src={chat.profilePic || avatarImage} alt={chat.fullName} />
               </div>

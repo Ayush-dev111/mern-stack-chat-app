@@ -5,8 +5,8 @@ import { connectDb } from "./src/lib/database.js";
 import { ENV } from "./src/lib/env.js";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import {app, server} from './src/lib/socket.js'
 
-const app = express();
 const PORT = ENV.PORT || 3500;
 
 app.use(express.json({ limit: '50mb' }));
@@ -23,7 +23,7 @@ app.get("/" , (req,res)=>{
     res.send("API is running...");
 });
 
-app.listen(PORT , ()=>{
+server.listen(PORT , ()=>{
     console.log(`Server is running on port http://localhost:${PORT}`);
     connectDb();
 })
