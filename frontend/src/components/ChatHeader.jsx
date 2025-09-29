@@ -11,7 +11,7 @@ function ChatHeader() {
     const handleEscKey = (event) => {
       if (event.key === "Escape") setSelectedUser(null);
     };
-
+    
     window.addEventListener("keydown", handleEscKey);
 
     // cleanup function
