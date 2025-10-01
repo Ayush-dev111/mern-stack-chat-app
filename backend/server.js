@@ -10,6 +10,7 @@ import {app, server} from './src/lib/socket.js'
 const PORT = ENV.PORT || 3500;
 
 app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cookieParser());
 app.use(cors({
     origin: ENV.CLIENT_URL,
