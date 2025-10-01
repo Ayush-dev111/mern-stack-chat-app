@@ -1,8 +1,8 @@
 import React from 'react'
-import keyStroke1 from '../assets/Sounds/keyStroke1.mp3';
-import keyStroke2 from '../assets/Sounds/keyStroke2.mp3';
-import keyStroke3 from '../assets/Sounds/keyStroke3.mp3';
-import keyStroke4 from '../assets/Sounds/keyStroke4.mp3';
+import keyStroke1 from '../assets/Sounds/keystroke1.mp3';
+import keyStroke2 from '../assets/Sounds/keystroke2.mp3';
+import keyStroke3 from '../assets/Sounds/keystroke3.mp3';
+import keyStroke4 from '../assets/Sounds/keystroke4.mp3';
 const keyStrokeSounds = [
     new Audio(keyStroke1),
     new Audio(keyStroke2),
