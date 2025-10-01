@@ -13,7 +13,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cookieParser());
 app.use(cors({
-    origin: ENV.CLIENT_URL,
+    origin: "https://buzz-chat-fp3l.onrender.com",
     credentials: true
 }))
 app.use("/api/auth" , authRoutes);
