@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.NODE_ENV === "development" ? "http://localhost:3500/api" : "https://mern-stack-chat-app-x4ny.onrender.com/api",
+  baseURL: "https://mern-stack-chat-app-x4ny.onrender.com/api",
   withCredentials: true,
 });
