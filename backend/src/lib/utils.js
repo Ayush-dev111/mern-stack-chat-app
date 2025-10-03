@@ -16,6 +16,6 @@ export const generateToken = (userId, res)=>{
         httpOnly: true,
         sameSite: "none",
         secure: ENV.NODE_ENV === "development" ? false : true,
-    })
+    });
     return token;
 };
